@@ -18,7 +18,14 @@ endfunction
 
 " Functions {{{1
 function! s:remove_priority()
-    :s/^(\w)\s\+//ge
+    let l:line = getline(".")
+    if l:line =~# '^\s\+-'
+        " Remove sub item
+        :s/^\(\s\+\)-\s\+/\1/
+    else
+        " Remove main proprity
+        :s/^(\w)\s\+//ge
+    endif
 endfunction
 
 function! s:get_current_date()
